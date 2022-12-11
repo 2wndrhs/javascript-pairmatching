@@ -1,7 +1,10 @@
-const InputView = require('../views/InputView');
+const Crew = require('../models/Crew');
 
-const { FEATURE } = require('../utils/constants');
+const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
+
+const CrewFileReader = require('../utils/CrewFileReader');
+const { FEATURE, COURSE } = require('../utils/constants');
 
 class AppController {
   #featureHandlers = Object.freeze({
@@ -32,7 +35,12 @@ class AppController {
     );
   }
 
-  #onInputMatchingArgs(args) {}
+  #onInputMatchingArgs(args) {
+    const [course, level, mission] = args.split(',');
+
+    const crewNames = CrewFileReader.read(course);
+    console.log(crewNames);
+  }
 }
 
 module.exports = AppController;
