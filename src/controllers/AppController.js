@@ -22,7 +22,17 @@ class AppController {
 
   #onInputMatching() {
     OutputView.printCoursesAndMissions();
+
+    this.#inputMatchingArgs();
   }
+
+  #inputMatchingArgs() {
+    InputView.readCourseAndLevelAndMission(
+      this.#onInputMatchingArgs.bind(this),
+    );
+  }
+
+  #onInputMatchingArgs(args) {}
 }
 
 module.exports = AppController;
