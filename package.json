@@ -1,0 +1,28 @@
+{
+  "name": "javascript-pairmatching",
+  "version": "1.0.0",
+  "description": "우아한테크코스 프리코스 패어매칭관리 미션",
+  "dependencies": {
+    "@woowacourse/mission-utils": "^1.0.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.4",
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^29.0.3",
+    "prettier": "^2.8.1"
+  },
+  "scripts": {
+    "test": "jest --detectOpenHandles --watch"
+  },
+  "keywords": [],
+  "author": "2wndrhs",
+  "license": "MIT",
+  "engineStrict": true,
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=14.0.0"
+  }
+}
