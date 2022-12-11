@@ -1,9 +1,15 @@
-const OutputView = require('../views/OutputView');
+const InputView = require('../views/InputView');
 
 class AppController {
   start() {
-    OutputView.printStarting();
+    this.#inputFeature();
   }
+
+  #inputFeature() {
+    InputView.readFeature(this.#onInputFeature.bind(this));
+  }
+
+  #onInputFeature(feat) {}
 }
 
 module.exports = AppController;
