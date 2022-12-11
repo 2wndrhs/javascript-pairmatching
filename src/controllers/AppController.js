@@ -1,6 +1,13 @@
 const InputView = require('../views/InputView');
 
+const { FEATURE } = require('../utils/constants');
+const OutputView = require('../views/OutputView');
+
 class AppController {
+  #featureHandlers = Object.freeze({
+    [FEATURE.MATCHING]: this.#onInputMatching.bind(this),
+  });
+
   start() {
     this.#inputFeature();
   }
@@ -9,7 +16,13 @@ class AppController {
     InputView.readFeature(this.#onInputFeature.bind(this));
   }
 
-  #onInputFeature(feat) {}
+  #onInputFeature(feat) {
+    this.#featureHandlers[feat]();
+  }
+
+  #onInputMatching() {
+    OutputView.printCoursesAndMissions();
+  }
 }
 
 module.exports = AppController;
