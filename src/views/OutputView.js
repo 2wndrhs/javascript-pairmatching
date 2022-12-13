@@ -7,6 +7,7 @@ const MESSAGE = Object.freeze({
   MISSION: '미션',
   LEVEL: '레벨',
   DIVIDER: '#############################################',
+  RESULT: '페어 매칭 결과입니다.',
 });
 
 const OutputView = {
@@ -29,6 +30,15 @@ const OutputView = {
         `  - ${level}: ${MISSION[level] ? MISSION[level].join(' | ') : ''}`,
       ),
     );
+  },
+
+  printPairs(pairs) {
+    Console.print(`\n${MESSAGE.RESULT}`);
+    pairs
+      .map((pair) => pair.map((crew) => crew.getName()))
+      .forEach((pair) => {
+        Console.print(pair.join(' : '));
+      });
   },
 };
 

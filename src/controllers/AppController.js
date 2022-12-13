@@ -1,5 +1,5 @@
 const Crew = require('../models/Crew');
-const Level = require('../models/Level');
+const Mission = require('../models/Mission');
 const PairMatcher = require('../models/PairMatcher');
 
 const InputView = require('../views/InputView');
@@ -9,11 +9,11 @@ const CrewFileReader = require('../utils/CrewFileReader');
 const { FEATURE, COURSE } = require('../utils/constants');
 
 class AppController {
-  #level;
-
   #featureHandlers = Object.freeze({
     [FEATURE.MATCHING]: this.#onInputMatching.bind(this),
   });
+
+  #pairMatchingMap = new Map();
 
   start() {
     this.#inputFeature();
@@ -40,20 +40,18 @@ class AppController {
   }
 
   #onInputMatchingArgs(args) {
-    const [course, level, mission] = args.split(',');
+    const [course, level, missionName] = args.split(',');
+    const mission = new Mission(course, level, missionName);
 
-    this.#level = new Level(level);
-    const crewNames = CrewFileReader.read(course);
-    const crews = crewNames.map((name) => new Crew(course, name));
-
-    this.#matchPair(crews);
+    const pairs = this.#matchPair(course);
+    OutputView.printPairs(pairs);
   }
 
-  #matchPair(crews) {
-    const crewNames = crews.map((crew) => crew.getName());
+  #matchPair(course) {
+    const crewNames = CrewFileReader.read(course);
+    const pairs = PairMatcher.match(crewNames);
 
-    const pair = PairMatcher.match(crewNames);
-    console.log(pair);
+    return pairs.map((pair) => pair.map((crew, _, arr) => new Crew(crew, arr)));
   }
 }
 

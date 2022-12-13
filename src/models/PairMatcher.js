@@ -3,13 +3,13 @@ const { Random } = require('@woowacourse/mission-utils');
 const PairMatcher = {
   match(crewNames) {
     const shuffledCrew = this.generateShuffledCrew(crewNames);
-    const pair = this.generatePair(shuffledCrew);
+    const pairs = this.generatePair(shuffledCrew);
     const hasSoloCrew = shuffledCrew.length % 2;
 
     if (hasSoloCrew) {
-      this.addSoloCrewToPair(pair, shuffledCrew);
+      return this.addSoloCrewToPair(pairs, shuffledCrew);
     }
-    return pair;
+    return pairs;
   },
 
   generateShuffledCrew(crewNames) {
@@ -28,9 +28,11 @@ const PairMatcher = {
     ]);
   },
 
-  addSoloCrewToPair(pair, shuffledCrew) {
+  addSoloCrewToPair(pairs, shuffledCrew) {
     const soloCrew = shuffledCrew[shuffledCrew.length - 1];
-    pair[pair.length - 1].push(soloCrew);
+    pairs[pairs.length - 1].push(soloCrew);
+
+    return pairs;
   },
 };
 

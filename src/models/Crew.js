@@ -1,13 +1,11 @@
-const Course = require('./Course');
-
 class Crew {
-  #course;
-
   #name;
 
-  constructor(course, name) {
-    this.#course = new Course(course);
+  #pair = [];
+
+  constructor(name, pair) {
     this.#name = name;
+    this.#pair = pair.filter((crew) => name !== crew);
   }
 
   getName() {
