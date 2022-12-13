@@ -41,18 +41,38 @@ class AppController {
 
   #onInputMatchingArgs(args) {
     const [course, level, missionName] = args.split(',');
+    this.#checkRematching(course, level, missionName);
     const mission = new Mission(course, level, missionName);
-
     const pairs = this.#matchPair(course);
+
     OutputView.printPairs(pairs);
+    this.#pairMatchingMap.set(mission, pairs.flat(2));
+    this.#inputFeature();
+  }
+
+  #checkRematching(course, level, missionName) {
+    const hasSameMission = [...this.#pairMatchingMap.keys()].some((mission) =>
+      mission.isSameMission(course, level, missionName),
+    );
+
+    if (hasSameMission) {
+      this.#inputRematchingCommand();
+    }
   }
 
   #matchPair(course) {
     const crewNames = CrewFileReader.read(course);
     const pairs = PairMatcher.match(crewNames);
+    const toCrew = (crew, _, pair) => new Crew(crew, pair);
 
-    return pairs.map((pair) => pair.map((crew, _, arr) => new Crew(crew, arr)));
+    return pairs.map((pair) => pair.map(toCrew));
   }
+
+  #inputRematchingCommand(command) {
+    InputView.readRematching(this.#onInputRematchingCommand.bind(this));
+  }
+
+  #onInputRematchingCommand(command) {}
 }
 
 module.exports = AppController;

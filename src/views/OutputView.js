@@ -39,6 +39,7 @@ const OutputView = {
       .forEach((pair) => {
         Console.print(pair.join(' : '));
       });
+    Console.print('\n');
   },
 };
 

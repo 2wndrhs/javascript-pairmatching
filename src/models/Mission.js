@@ -10,6 +10,14 @@ class Mission {
     this.#level = level;
     this.#name = name;
   }
+
+  isSameMission(course, level, name) {
+    const isSameCourse = this.#course === course;
+    const isSameLevel = this.#level === level;
+    const isSameMissionName = this.#name === name;
+
+    return isSameCourse && isSameLevel && isSameMissionName;
+  }
 }
 
 module.exports = Mission;

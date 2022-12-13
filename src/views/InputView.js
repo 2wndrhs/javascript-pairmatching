@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const { FEATURE } = require('../utils/constants');
+const { FEATURE, REMATCHING } = require('../utils/constants');
 
 const QUERY = Object.freeze({
   FEATURE: '기능을 선택하세요.',
@@ -12,6 +12,7 @@ const QUERY = Object.freeze({
   },
   COURSE_LEVEL_MISSION: '과정, 레벨, 미션을 선택하세요.',
   EXAMPLE: 'ex) 백엔드, 레벨1, 자동차경주',
+  REMATCHING: '매칭 정보가 있습니다. 다시 매칭하시겠습니까?',
 });
 
 const InputView = {
@@ -26,6 +27,12 @@ const InputView = {
   readCourseAndLevelAndMission(callback) {
     Console.print(QUERY.COURSE_LEVEL_MISSION);
     Console.print(QUERY.EXAMPLE);
+    Console.readLine('', callback);
+  },
+
+  readRematching(callback) {
+    Console.print(QUERY.REMATCHING);
+    Console.print(`${REMATCHING.YES} | ${REMATCHING.NO}`);
     Console.readLine('', callback);
   },
 };

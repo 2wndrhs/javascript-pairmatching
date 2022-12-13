@@ -24,9 +24,15 @@ const MISSION = Object.freeze({
   [LEVEL.FOUR]: ['성능개선', '배포'],
 });
 
+const REMATCHING = Object.freeze({
+  YES: '네',
+  NO: '아니오',
+});
+
 module.exports = {
   FEATURE,
   COURSE,
   LEVEL,
   MISSION,
+  REMATCHING,
 };
